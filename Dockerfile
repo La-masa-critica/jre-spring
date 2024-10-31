@@ -11,11 +11,12 @@ RUN $JAVA_HOME/bin/jlink \
 
 FROM docker.io/debian:stable-slim
 ENV JAVA_HOME=/opt/java/openjdk
-ENV PATH "${JAVA_HOME}/bin:${PATH}"
+ENV PATH="${JAVA_HOME}/bin:${PATH}"
 COPY --from=jre-build /javaruntime $JAVA_HOME
 
 LABEL maintainer="jorge1b3@hotmail.es" \
       description="Custom JRE for Spring Boot microservices" \
-      version="1.0"
+      version="1.0" \
+      org.opencontainers.image.source = "https://github.com/La-masa-critica/jre-spring"
 
 CMD ["java", "-version"]
