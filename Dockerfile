@@ -14,9 +14,14 @@ ENV JAVA_HOME=/opt/java/openjdk
 ENV PATH="${JAVA_HOME}/bin:${PATH}"
 COPY --from=jre-build /javaruntime $JAVA_HOME
 
+# Install curl
+RUN apt-get update && apt-get install -y --no-install-recommends curl && apt-get clean && rm -rf /var/lib/apt/lists/*
+
 LABEL maintainer="jorge1b3@hotmail.es" \
-      description="Custom JRE for Spring Boot microservices" \
-      version="1.0" \
-      org.opencontainers.image.source = "https://github.com/La-masa-critica/jre-spring"
+      version="2.0" 
+
+LABEL org.opencontainers.image.source = "https://github.com/La-masa-critica/jre-spring"
+LABEL org.opencontainers.image.description = "Custom JRE for Spring Boot microservices" 
+LABEL org.opencontainers.image.licenses = "MIT"
 
 CMD ["java", "-version"]
